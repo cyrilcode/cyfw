@@ -1,0 +1,12 @@
+[submodule "lib/glfw"]
+	path = lib/glfw
+	url = git@github.com:cyrilcode/glfw.git
+[submodule "lib/glad"]
+	path = lib/glad
+	url = git@github.com:cyrilcode/glad.git
+[submodule "lib/eigen"]
+	path = lib/eigen
+	url = git@github.com:cyrilcode/eigen.git
+[submodule "tools/embed-resource"]
+	path = tools/embed-resource
+	url = git@github.com:cyrilcode/embed-resource.git
