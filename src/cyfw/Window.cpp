@@ -89,6 +89,11 @@ namespace cy
             static_cast<Window*>(glfwGetWindowUserPointer(w))->queue(window::CursorEnterEvent(entered));
         }
 
+        static void character_callback(GLFWwindow* w, unsigned int codepoint)
+        {
+            static_cast<Window*>(glfwGetWindowUserPointer(w))->queue(window::CharEvent(codepoint));
+        }
+
         namespace glfw
         {
 
@@ -161,6 +166,7 @@ namespace cy
         glfwSetMouseButtonCallback(static_cast<GLFWwindow *>(windowPtr), window::mouse_button_callback);
         glfwSetCursorPosCallback(static_cast<GLFWwindow *>(windowPtr), window::cursor_move_callback);
         glfwSetCursorEnterCallback(static_cast<GLFWwindow *>(windowPtr), window::cursor_enter_callback);
+        glfwSetCharCallback(static_cast<GLFWwindow *>(windowPtr), window::character_callback);
         if (first) gladLoadGL();
         vec2f fbSize = getFramebufferSize();
         glViewport(0, 0, static_cast<GLuint>(fbSize.x()), static_cast<GLuint>(fbSize.y()));
@@ -231,5 +237,8 @@ namespace cy
     }
     void Window::queue(window::CursorEnterEvent e) {
         enterQueue.push(e);
+    }
+    void Window::queue(window::CharEvent e) {
+        charQueue.push(e);
     }
 }

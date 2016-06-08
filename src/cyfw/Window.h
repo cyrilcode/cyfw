@@ -162,6 +162,11 @@ namespace cy
                     : key(k), scancode(s), action(a), mods(m) { }
         };
 
+        struct CharEvent {
+            unsigned int codepoint;
+            CharEvent(int c) : codepoint(c) {}
+        };
+
         struct ScrollEvent {
             double xOffset;
             double yOffset;
@@ -261,6 +266,11 @@ namespace cy
                     a.cursorEnter(enterQueue.front());
                     enterQueue.pop();
                 }
+                while (!charQueue.empty())
+                {
+                    a.textInput(charQueue.front());
+                    charQueue.pop();
+                }
             }
         }
 
@@ -271,6 +281,7 @@ namespace cy
         void queue(window::ScrollEvent e);
         void queue(window::CursorMoveEvent e);
         void queue(window::CursorEnterEvent e);
+        void queue(window::CharEvent e);
     private:
         void initialize(bool first = false);
         int shouldClose();
@@ -289,6 +300,7 @@ namespace cy
         std::queue<window::ScrollEvent> scrollQueue;
         std::queue<window::CursorMoveEvent> moveQueue;
         std::queue<window::CursorEnterEvent> enterQueue;
+        std::queue<window::CharEvent> charQueue;
 
     private:
         template <class S>

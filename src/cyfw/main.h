@@ -21,6 +21,7 @@ namespace cy
         void mouseButton(window::MouseButtonEvent) {}
         void cursorMove(window::CursorMoveEvent) {}
         void cursorEnter(window::CursorEnterEvent) {}
+        void textInput(window::CharEvent) {}
     protected:
         ptr<Window> window;
     };
