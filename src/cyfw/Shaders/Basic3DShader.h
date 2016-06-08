@@ -15,6 +15,7 @@ namespace cy
             void drawCube();
             void setProjectionMatrix(const mat4f &m);
             void setViewMatrix(const aff3f &m);
+            void setLightPosition(const vec3f &p);
         private:
             Shader shader;
         };

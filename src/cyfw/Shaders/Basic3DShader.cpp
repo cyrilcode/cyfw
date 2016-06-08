@@ -9,7 +9,6 @@ namespace cy
 {
     namespace shader
     {
-
         void Basic3DShader::init()
         {
             shader = {};
@@ -26,6 +25,16 @@ namespace cy
             positions.col(5) <<  0.5, -0.5, -0.5;
             positions.col(6) <<  0.5,  0.5, -0.5;
             positions.col(7) << -0.5,  0.5, -0.5;
+
+            mat_f colors(3, 8);
+            colors.col(0) << 1, 0, 0;
+            colors.col(1) << 0, 1, 0;
+            colors.col(2) << 0, 0, 1;
+            colors.col(3) << 1, 0, 0;
+            colors.col(4) << 1, 1, 0;
+            colors.col(5) << 0, 1, 1;
+            colors.col(6) << 1, 0, 1;
+            colors.col(7) << 1, 1, 1;
 
             mat_u indices(3, 12);
             // front
@@ -50,10 +59,14 @@ namespace cy
             shader.bind();
             shader.uploadIndices(indices);
             shader.uploadAttrib("position", positions);
+            shader.uploadAttrib("normal", positions);
+            shader.uploadAttrib("color", colors);
         }
 
         void Basic3DShader::bind(ptr <Window> window)
         {
+            window->setClearColor({0.0f,0.0f,0.0f,1.0f});
+            window->clear();
             shader.bind();
         }
 
@@ -69,6 +82,10 @@ namespace cy
         void Basic3DShader::setViewMatrix(const aff3f &m)
         {
             shader.setUniform("view", m);
+        }
+
+        void Basic3DShader::setLightPosition(const vec3f &p) {
+            shader.setUniform("lightPos", p);
         }
 
     }

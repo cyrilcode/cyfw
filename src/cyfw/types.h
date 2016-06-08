@@ -27,7 +27,8 @@ namespace cy
     {
         vec4f _v;
     public:
-        inline color(vec4f value) : _v(value) {}
+//        inline color(vec4f value) : _v(value) {}
+        inline color(float r, float g, float b, float a) : _v(r, g, b, a) {}
         inline float& r() { return _v.x(); }
         inline float& g() { return _v.y(); }
         inline float& b() { return _v.z(); }

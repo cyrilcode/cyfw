@@ -118,7 +118,7 @@ namespace cy
     }
 
     Window::Window(const int width, const int height, std::string title, bool fullscreen)
-        : clearColor({0.949, 0.949, 0.949, 1}), isFullscreen{fullscreen}, isWindowStateInvalid{false},
+        : clearColor{0.949, 0.949, 0.949, 1}, isFullscreen{fullscreen}, isWindowStateInvalid{false},
           savedWidth{width}, savedHeight{height}, savedTitle{title}, _closeOnEscapeKey{true},
           _allowFullscreen{true}
     {
