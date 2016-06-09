@@ -16,6 +16,7 @@
 #include "VideoGrabber.h"
 #include "Texture.h"
 #include "Logger.h"
+#include "Gui.h"
 
 namespace cy
 {

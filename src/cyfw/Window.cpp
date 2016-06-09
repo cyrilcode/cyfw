@@ -59,6 +59,7 @@ namespace cy
             }
             static_cast<Window*>(glfwGetWindowUserPointer(w))->queue(
                     window::KeyEvent(
+                            w,
                             static_cast<window::key>(key), s,
                             static_cast<window::action>(action), static_cast<window::mods>(mods)));
         }
@@ -68,7 +69,7 @@ namespace cy
             double xpos, ypos;
             glfwGetCursorPos(w, &xpos, &ypos);
             static_cast<Window*>(glfwGetWindowUserPointer(w))->queue(
-                    window::MouseButtonEvent(
+                    window::MouseButtonEvent(w,
                             static_cast<window::button>(button),
                             static_cast<window::action>(action),
                             static_cast<window::mods>(mods),
@@ -77,7 +78,7 @@ namespace cy
 
         static void scroll_callback(GLFWwindow* w, double xOffset, double yOffset)
         {
-            static_cast<Window*>(glfwGetWindowUserPointer(w))->queue(window::ScrollEvent(xOffset, yOffset));
+            static_cast<Window*>(glfwGetWindowUserPointer(w))->queue(window::ScrollEvent(w, xOffset, yOffset));
         }
 
         static void cursor_move_callback(GLFWwindow* w, double xPos, double yPos)
@@ -91,7 +92,7 @@ namespace cy
 
         static void character_callback(GLFWwindow* w, unsigned int codepoint)
         {
-            static_cast<Window*>(glfwGetWindowUserPointer(w))->queue(window::CharEvent(codepoint));
+            static_cast<Window*>(glfwGetWindowUserPointer(w))->queue(window::CharEvent(w, codepoint));
         }
 
         static void resize_callback(GLFWwindow* w, int width, int height)

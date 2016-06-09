@@ -157,21 +157,24 @@ namespace cy
             int scancode;
             cy::window::action action;
             cy::window::mods mods;
+            void* ptr;
 
-            KeyEvent(window::key k, int s, window::action a, window::mods m)
-                    : key(k), scancode(s), action(a), mods(m) { }
+            KeyEvent(void* p, window::key k, int s, window::action a, window::mods m)
+                    : ptr(p), key(k), scancode(s), action(a), mods(m) { }
         };
 
         struct CharEvent {
             unsigned int codepoint;
-            CharEvent(int c) : codepoint(c) {}
+            void* ptr;
+            CharEvent(void* p, int c) : ptr(p), codepoint(c) {}
         };
 
         struct ScrollEvent {
             double xOffset;
             double yOffset;
+            void* ptr;
 
-            ScrollEvent(double x, double y) : xOffset(x), yOffset(y) { }
+            ScrollEvent(void* p, double x, double y) : ptr(p), xOffset(x), yOffset(y) { }
         };
 
         enum class button {
@@ -193,9 +196,10 @@ namespace cy
             cy::window::action action;
             cy::window::mods mods;
             vec2f location;
+            void* ptr;
 
-            MouseButtonEvent(window::button b, window::action a, window::mods m, vec2f l)
-                    : button(b), action(a), mods(m), location(l) { }
+            MouseButtonEvent(void* p, window::button b, window::action a, window::mods m, vec2f l)
+                    : ptr(p), button(b), action(a), mods(m), location(l) { }
         };
 
         struct CursorMoveEvent
@@ -284,6 +288,8 @@ namespace cy
                 }
             }
         }
+
+        inline void* getWindowPtr() { return windowPtr; }
 
         bool closeOnEscapeKey();
         bool allowFullscreen();

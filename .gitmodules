@@ -13,3 +13,6 @@
 [submodule "lib/video_capture"]
 	path = lib/video_capture
 	url = git@github.com:cyrilcode/video_capture.git
+[submodule "lib/imgui"]
+	path = lib/imgui
+	url = git@github.com:cyrilcode/imgui.git

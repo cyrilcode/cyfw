@@ -29,6 +29,11 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/lib/glfw")
 add_subdirectory(lib/video_capture)
 set(cyfw_INCLUDE_DIR ${cyfw_INCLUDE_DIR} ${VIDCAP_INCLUDE_DIR})
 
+add_subdirectory(lib/imgui)
+set(cyfw_extra_INCLUDE_DIR ${cyfw_extra_INCLUDE_DIR} ${IMGUI_INCLUDE_DIRS})
+
+add_library(imgui_glfw lib/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp)
+
 include_directories(${cyfw_INCLUDE_DIR} ${cyfw_extra_INCLUDE_DIR})
 
 set(SOURCE_FILES
@@ -38,11 +43,15 @@ set(SOURCE_FILES
         src/cyfw/VideoGrabber.cpp
         src/cyfw/Texture.cpp
         src/cyfw/Logger.cpp
+        src/cyfw/Gui.cpp
         )
 
 add_subdirectory(src/cyfw/Shaders)
 
 add_library(cyfw STATIC ${SOURCE_FILES})
-target_link_libraries(cyfw ${GLAD_LIBRARIES} glfw cyfw_shaders ${VIDCAP_LIBRARIES})
+target_link_libraries(cyfw ${GLAD_LIBRARIES}
+        glfw cyfw_shaders ${VIDCAP_LIBRARIES}
+        ${IMGUI_LIBRARIES} imgui_glfw ${IMGUI_DEMO_LIBRARY}
+        )
 
 set(CYFW_INCLUDE_DIR ${cyfw_INCLUDE_DIR} PARENT_SCOPE)
