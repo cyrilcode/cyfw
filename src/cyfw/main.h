@@ -15,6 +15,7 @@
 #include "Camera.h"
 #include "VideoGrabber.h"
 #include "Texture.h"
+#include "Logger.h"
 
 namespace cy
 {
@@ -36,23 +37,28 @@ namespace cy
         ptr<Window> window;
     };
 
-
-    template <class APP>
+    // TODO: replace LOG_NAME because passing string as template argument doesn't work
+    template <class APP, class LOG = NullLogger, logger::level LOG_LEVEL = logger::level::ERROR, std::string * LOG_NAME = &default_log_filename>
     int run(const int width = 640, const int height = 480,
             std::string title = "cyfw window", bool fullscreen = false)
     {
+        Logger<LOG> logger(LOG_LEVEL, *LOG_NAME);
         if (!cy::window::init())
+        {
+            logger.error("Failed to initialize framework.");
             return EXIT_FAILURE;
+        }
         atexit(cy::window::terminate);
 
         try
         {
+            logger.verbose("Opening window");
             ptr<Window> window = std::make_shared<Window>(width, height, title, fullscreen);
             window->run<APP>();
         }
         catch (std::string error)
         {
-            std::cerr << error << std::endl;
+            logger.error(error);
             return EXIT_FAILURE;
         }
 

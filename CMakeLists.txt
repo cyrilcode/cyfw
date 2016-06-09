@@ -37,6 +37,7 @@ set(SOURCE_FILES
         src/cyfw/Camera.cpp
         src/cyfw/VideoGrabber.cpp
         src/cyfw/Texture.cpp
+        src/cyfw/Logger.cpp
         )
 
 add_subdirectory(src/cyfw/Shaders)
