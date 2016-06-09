@@ -15,6 +15,7 @@ namespace cy
         void setViewport(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
         void setViewport(unsigned int w, unsigned int h);
         void setViewport(vec2f dim);
+        void setViewport(vec2i dim);
         void setPosition(const vec3f &pos);
         void setTarget(const vec3f &target);
         void setDirection(const vec3f &newDirection);

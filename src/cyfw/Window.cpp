@@ -139,12 +139,12 @@ namespace cy
         initialize(true);
     }
 
-    vec2f Window::getFramebufferSize() {
+    vec2i Window::getFramebufferSize() {
         int width, height;
         glfwGetFramebufferSize(static_cast<GLFWwindow*>(windowPtr), &width, &height);
         return {width, height};
     }
-    vec2f Window::getWindowSize() {
+    vec2i Window::getWindowSize() {
         int width, height;
         glfwGetWindowSize(static_cast<GLFWwindow*>(windowPtr), &width, &height);
         return {width, height};
@@ -174,7 +174,7 @@ namespace cy
         glfwSetCharCallback(static_cast<GLFWwindow *>(windowPtr), window::character_callback);
         glfwSetFramebufferSizeCallback(static_cast<GLFWwindow *>(windowPtr), window::resize_callback);
         if (first) gladLoadGL();
-        vec2f fbSize = getFramebufferSize();
+        vec2i fbSize = getFramebufferSize();
         glViewport(0, 0, static_cast<GLuint>(fbSize.x()), static_cast<GLuint>(fbSize.y()));
         glEnable(GL_DEPTH_TEST);
         clear();

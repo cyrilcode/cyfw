@@ -225,8 +225,8 @@ namespace cy
                std::string title = "cyfw window", bool fullscreen = false);
 
         void toggleFullscreen();
-        vec2f getFramebufferSize();
-        vec2f getWindowSize();
+        vec2i getFramebufferSize();
+        vec2i getWindowSize();
         void setClearColor(color c);
         void clear();
         void quit();

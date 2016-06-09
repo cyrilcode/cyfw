@@ -46,6 +46,12 @@ namespace cy
         vpHeight = dim.y();
         hasProjChanged = true;
     }
+    void Camera::setViewport(vec2i dim)
+    {
+        vpWidth = dim.x();
+        vpHeight = dim.y();
+        hasProjChanged = true;
+    }
 
     vec3f Camera::getPosition()
     {

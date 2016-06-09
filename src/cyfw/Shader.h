@@ -37,6 +37,7 @@ namespace cy
         int uniform(const std::string &name, bool warn = true) const;
 
         void setUniform(const std::string &name, const float v, bool warn = true);
+        void setUniform(const std::string &name, const vec2i v, bool warn = true);
         void setUniform(const std::string &name, const vec2f v, bool warn = true);
         void setUniform(const std::string &name, const vec3f v, bool warn = true);
         void setUniform(const std::string &name, const mat4f &m, bool warn = true);
