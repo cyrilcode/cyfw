@@ -3,6 +3,7 @@
 #define CYFW_GUI_H
 
 #include "Window.h"
+#include <imgui.h>
 
 namespace cy
 {

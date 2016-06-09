@@ -30,7 +30,7 @@ add_subdirectory(lib/video_capture)
 set(cyfw_INCLUDE_DIR ${cyfw_INCLUDE_DIR} ${VIDCAP_INCLUDE_DIR})
 
 add_subdirectory(lib/imgui)
-set(cyfw_extra_INCLUDE_DIR ${cyfw_extra_INCLUDE_DIR} ${IMGUI_INCLUDE_DIRS})
+set(cyfw_INCLUDE_DIR ${cyfw_INCLUDE_DIR} ${IMGUI_INCLUDE_DIRS})
 
 add_library(imgui_glfw lib/imgui/examples/opengl3_example/imgui_impl_glfw_gl3.cpp)
 
