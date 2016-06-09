@@ -10,6 +10,8 @@ namespace cy
     template<typename T>
     using ptr = std::shared_ptr<T>;
 
+    typedef Eigen::Vector2i vec2i;
+
     typedef Eigen::Vector2f vec2f;
     typedef Eigen::Vector3f vec3f;
     typedef Eigen::Vector4f vec4f;

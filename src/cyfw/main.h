@@ -1,6 +1,11 @@
 #ifndef CYFW_MAIN_H
 #define CYFW_MAIN_H
 
+#ifndef GLSL_VERSION
+#define GLSL_VERSION "#version 330\n"
+#endif
+// Use this to pass raw GLSL strings
+#define glsl(x) GLSL_VERSION #x
 
 #include <iostream>
 
@@ -8,6 +13,8 @@
 #include "Window.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "VideoGrabber.h"
+#include "Texture.h"
 
 namespace cy
 {
@@ -15,6 +22,8 @@ namespace cy
     class App
     {
     public:
+        void draw() {}
+        void setup() {}
         void setWindowPointer(ptr<Window> w)  { window = w; }
         void key(window::KeyEvent) {}
         void scroll(window::ScrollEvent) {}
@@ -22,6 +31,7 @@ namespace cy
         void cursorMove(window::CursorMoveEvent) {}
         void cursorEnter(window::CursorEnterEvent) {}
         void textInput(window::CharEvent) {}
+        void resize(window::ResizeEvent) {}
     protected:
         ptr<Window> window;
     };

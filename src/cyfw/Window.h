@@ -209,6 +209,12 @@ namespace cy
             int entered;
             CursorEnterEvent(int e) : entered(e) {}
         };
+
+        struct ResizeEvent
+        {
+            vec2i size;
+            ResizeEvent(int w, int h) : size(w, h) {}
+        };
     }
 
 
@@ -271,6 +277,11 @@ namespace cy
                     a.textInput(charQueue.front());
                     charQueue.pop();
                 }
+                while (!resizeQueue.empty())
+                {
+                    a.resize(resizeQueue.front());
+                    resizeQueue.pop();
+                }
             }
         }
 
@@ -282,6 +293,7 @@ namespace cy
         void queue(window::CursorMoveEvent e);
         void queue(window::CursorEnterEvent e);
         void queue(window::CharEvent e);
+        void queue(window::ResizeEvent e);
     private:
         void initialize(bool first = false);
         int shouldClose();
@@ -301,6 +313,7 @@ namespace cy
         std::queue<window::CursorMoveEvent> moveQueue;
         std::queue<window::CursorEnterEvent> enterQueue;
         std::queue<window::CharEvent> charQueue;
+        std::queue<window::ResizeEvent> resizeQueue;
 
     private:
         template <class S>

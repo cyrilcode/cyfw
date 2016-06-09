@@ -13,7 +13,8 @@ set(cyfw_INCLUDE_DIR
         )
 
 add_subdirectory(lib/glad)
-set(cyfw_extra_INCLUDE_DIR ${GLAD_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/lib/eigen/unsupported)
+set(cyfw_INCLUDE_DIR ${cyfw_INCLUDE_DIR} ${GLAD_INCLUDE_DIRS})
+set(cyfw_extra_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/eigen/unsupported)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated-declarations")
@@ -25,17 +26,22 @@ set(GLFW_BUILD_INSTALL OFF CACHE BOOL " " FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL " " FORCE)
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/lib/glfw")
 
+add_subdirectory(lib/video_capture)
+set(cyfw_INCLUDE_DIR ${cyfw_INCLUDE_DIR} ${VIDCAP_INCLUDE_DIR})
+
 include_directories(${cyfw_INCLUDE_DIR} ${cyfw_extra_INCLUDE_DIR})
 
 set(SOURCE_FILES
         src/cyfw/Window.cpp
         src/cyfw/Shader.cpp
         src/cyfw/Camera.cpp
+        src/cyfw/VideoGrabber.cpp
+        src/cyfw/Texture.cpp
         )
 
 add_subdirectory(src/cyfw/Shaders)
 
 add_library(cyfw STATIC ${SOURCE_FILES})
-target_link_libraries(cyfw ${GLAD_LIBRARIES} glfw cyfw_shaders)
+target_link_libraries(cyfw ${GLAD_LIBRARIES} glfw cyfw_shaders ${VIDCAP_LIBRARIES})
 
 set(CYFW_INCLUDE_DIR ${cyfw_INCLUDE_DIR} PARENT_SCOPE)
