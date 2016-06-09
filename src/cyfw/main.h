@@ -22,7 +22,29 @@ namespace cy
 
     namespace math
     {
-        const static float TWO_PI = 6.28318;
+        const static float PI     = 3.14159265359;
+        const static float TWO_PI = 6.28318530718;
+
+        inline float map(const float v, const float iMin, const float iMax, const float oMin, const float oMax)
+        {
+            // TODO: check for divide by zero
+            return (v - iMin) / (iMax - iMin) * (oMax - oMin) + oMin;
+        }
+
+        // TODO: noise and random
+        float noise(const float x);
+        float noise(const float x, const float y);
+        float noise(const float x, const float y, const float z);
+        float rand();
+        float rand(float maximum);
+        float rand(float minimum, float maximum);
+
+        inline clamp(float v, float min, float max) {
+            return v < min ? min : value > max ? max : v;
+        }
+        inline float normalize(float v, float minimum, float maximum) {
+            clamp((v - minimum) / (maximum - minimum), 0, 1);
+        }
     }
 
     class App
