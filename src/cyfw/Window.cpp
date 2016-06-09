@@ -10,10 +10,13 @@ using namespace std;
 
 namespace cy
 {
-    double time()
-    {
-        return glfwGetTime();
-    }
+    double time() { return glfwGetTime(); }
+    // TODO: other time functions
+    // based off cy::time() but put inline in header?
+    // uint64_t millis()
+    // float Timef - time as float in seconds
+    // fast = timef * 10
+    // slow = timef * 2
 
     namespace window
     {

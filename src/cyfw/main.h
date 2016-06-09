@@ -20,6 +20,11 @@
 namespace cy
 {
 
+    namespace math
+    {
+        const static float TWO_PI = 6.28318;
+    }
+
     class App
     {
     public:

@@ -25,26 +25,8 @@ namespace cy
     typedef Eigen::Quaternionf quat4f;
     typedef Eigen::Affine3f aff3f;
 
-    class color
-    {
-        vec4f _v;
-    public:
-//        inline color(vec4f value) : _v(value) {}
-        inline color(float r, float g, float b, float a) : _v(r, g, b, a) {}
-        inline float& r() { return _v.x(); }
-        inline float& g() { return _v.y(); }
-        inline float& b() { return _v.z(); }
-        inline float& a() { return _v.w(); }
-        inline float r() const { return _v.x(); }
-        inline float g() const { return _v.y(); }
-        inline float b() const { return _v.z(); }
-        inline float a() const { return _v.w(); }
-        inline vec4f asVec4f() const { return _v; }
-        inline vec3f asVec3f() const { return {_v.x(), _v.y(), _v.z()}; };
-    };
-
-
 }
 
+#include "Util/Color.h"
 
 #endif
