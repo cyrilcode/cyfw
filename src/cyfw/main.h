@@ -39,11 +39,11 @@ namespace cy
         float rand(float maximum);
         float rand(float minimum, float maximum);
 
-        inline clamp(float v, float min, float max) {
-            return v < min ? min : value > max ? max : v;
+        inline float clamp(float v, float min, float max) {
+            return v < min ? min : v > max ? max : v;
         }
         inline float normalize(float v, float minimum, float maximum) {
-            clamp((v - minimum) / (maximum - minimum), 0, 1);
+            return clamp((v - minimum) / (maximum - minimum), 0, 1);
         }
     }
 
