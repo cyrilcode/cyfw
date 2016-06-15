@@ -10,6 +10,7 @@ set(cyfw_INCLUDE_DIR
         ${CMAKE_CURRENT_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}/lib/eigen
         ${EMBED_RES_INCLUDE_DIRS}
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib/libigl/include
         )
 
 add_subdirectory(lib/glad)
@@ -44,6 +45,7 @@ set(SOURCE_FILES
         src/cyfw/Texture.cpp
         src/cyfw/Logger.cpp
         src/cyfw/Gui.cpp
+        src/cyfw/Mesh.cpp
         )
 
 add_subdirectory(src/cyfw/Shaders)

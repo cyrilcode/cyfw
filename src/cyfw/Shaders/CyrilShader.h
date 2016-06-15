@@ -3,6 +3,7 @@
 #define CYFW_CYRILSHADER_H
 
 #include <stack>
+#include <cyfw/Mesh.h>
 #include "cyfw/main.h"
 #include "cyfw/Util/Palette.h"
 
@@ -13,7 +14,7 @@ namespace cy
 
         class CyrilShader {
         public:
-            CyrilShader() : currentColor{1,1,1,1} {}
+            CyrilShader() : currentColor{1,1,1,1}, cubeMesh{{},{}} {}
             void init();
             void bind(ptr<Window> window);
 
@@ -54,10 +55,11 @@ namespace cy
             void setViewMatrix(const aff3f &m);
 
         private:
-            Shader shader;
+            ptr<Shader> shader;
             std::stack<aff3f> matrixStack;
             aff3f modelMatrix;
             color currentColor;
+            Mesh cubeMesh;
         };
     }
 }
