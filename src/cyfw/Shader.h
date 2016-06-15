@@ -40,8 +40,12 @@ namespace cy
         void setUniform(const std::string &name, const vec2i v, bool warn = true);
         void setUniform(const std::string &name, const vec2f v, bool warn = true);
         void setUniform(const std::string &name, const vec3f v, bool warn = true);
+        void setUniform(const std::string &name, const vec4f v, bool warn = true);
         void setUniform(const std::string &name, const mat4f &m, bool warn = true);
         void setUniform(const std::string &name, const aff3f &m, bool warn = true);
+        inline void setUniform(const std::string &name, const color &c, bool warn = true) {
+            setUniform(name, c.asVec4f(), warn);
+        }
 
         /// Draw a sequence of primitives using a previously uploaded index buffer
         void drawIndexed(shader::mode type, uint32_t offset, uint32_t count);

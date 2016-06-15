@@ -6,15 +6,6 @@
 
 namespace cy
 {
-    // dependency injection static polymorphism
-    template<class GENERATOR = ListPalette>
-    class Palette {
-        GENERATOR p;
-    public:
-        Palette(GENERATOR generator) : p(generator) {}
-        inline color lerp(float f) { p.lerp(f); }
-        inline color select(float f) { p.select(f); }
-    };
 
     class ListPalette
     {
@@ -39,10 +30,23 @@ namespace cy
         ProceduralPalette(vec3f a_, vec3f b_, vec3f c_, vec3f d_)
                 : a(a_), b(b_), c(c_), d(d_) {}
         inline color lerp(float f) {
-            return a.array() + b.array() * (math::TWO_PI * (c.array() * f + d.array())).cos();
+            vec3f temp = a.array() + b.array() * (math::TWO_PI * (c.array() * f + d.array())).cos();
+            // TODO: move constructor for color then don't need temp?
+            return color(temp.x(), temp.y(), temp.z(), 1);
         }
-        inline select(float f) { return lerp(f); }
+        inline color select(float f) { return lerp(f); }
     };
+
+    // dependency injection static polymorphism
+    template<class GENERATOR = ListPalette>
+    class Palette {
+        GENERATOR p;
+    public:
+        Palette(GENERATOR generator) : p(generator) {}
+        inline color lerp(float f) { p.lerp(f); }
+        inline color select(float f) { p.select(f); }
+    };
+
 }
 
 

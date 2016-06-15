@@ -151,6 +151,9 @@ namespace cy
     void Shader::setUniform(const std::string &name, const vec3f v, bool warn) {
         glUniform3f(uniform(name, warn), v.x(), v.y(), v.z());
     }
+    void Shader::setUniform(const std::string &name, const vec4f v, bool warn) {
+        glUniform4f(uniform(name, warn), v.x(), v.y(), v.z(), v.w());
+    }
     void Shader::setUniform(const std::string &name, const mat4f &m, bool warn)
     {
         glUniformMatrix4fv(uniform(name, warn), 1, GL_FALSE, m.data());
