@@ -30,7 +30,7 @@ namespace cy
         void localTranslate(const vec3f &t);
         void localRotate(const quat4f &r);
         void rotateAroundTarget(const quat4f &q);
-        void reset(const vec3f &pos);
+        void reset(const vec3f &pos, const vec3f &target = {0,0,0});
 
 
         const aff3f& viewMatrix();

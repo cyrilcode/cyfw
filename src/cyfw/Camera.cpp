@@ -287,9 +287,10 @@ namespace cy
         hasViewChanged = true;
     }
 
-    void Camera::reset(const vec3f &pos) {
+    void Camera::reset(const vec3f &pos, const vec3f &t) {
         setPosition(pos);
-        setTarget({0,0,0});
+        setTarget(t);
         setOrientation({0,0,1,0});
+        hasViewChanged = true;
     }
 }

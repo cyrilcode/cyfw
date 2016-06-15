@@ -3,6 +3,8 @@
 #ifndef CYFW_COLOR_H
 #define CYFW_COLOR_H
 
+#include <imgui.h>
+
 namespace cy
 {
 
@@ -28,7 +30,14 @@ namespace cy
         // eg, f=0 then c1, f=1 then c2, f=0.5 50:50 mix of both
         static color lerp(color c1, color c2, float f);
         static color hex(int hexValue); // generate from hex value
-        static color hsb(float hue, float saturation, float brightness, float alpha);
+        inline static color hsb(float hue, float saturation, float brightness) {
+            return color::hsb(hue, saturation, brightness, 1.0);
+        }
+        inline static color hsb(float hue, float saturation, float brightness, float alpha) {
+            float r,g,b;
+            ImGui::ColorConvertHSVtoRGB(hue, saturation, brightness, r, g, b);
+            return {r, g, b, alpha};
+        }
 
         // TODO: add all named colors
         // c.f. https://www.w3.org/TR/css3-color/

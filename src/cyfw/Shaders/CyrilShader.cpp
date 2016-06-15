@@ -69,10 +69,14 @@ namespace cy
             cubeMesh.draw();
         }
 
-//        void CyrilShader::drawBall(const float r) {
-//            shader->setUniform("model", Eigen::Scaling(r) * modelMatrix);
-//            ballMesh.draw();
-//        }
+        void CyrilShader::drawBall(const float r) {
+            //shader->setUniform("model", Eigen::Scaling(r) * modelMatrix);
+            pushMatrix();
+            scale({r,r,r});
+            shader->setUniform("model", modelMatrix);
+            ballMesh.draw();
+            popMatrix();
+        }
 //
 //        void CyrilShader::drawCone(const vec2f &rh) {
 //            shader->setUniform("model", modelMatrix);
