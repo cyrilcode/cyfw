@@ -1,7 +1,3 @@
-# Blender v2.66 (sub 1) OBJ File: 'mesh_Cube.blend'
-# www.blender.org
-mtllib mesh_Cube.mtl
-o Cube
 v -1.000000 -1.000000 1.000000
 v -1.000000 -1.000000 -1.000000
 v 1.000000 -1.000000 -1.000000

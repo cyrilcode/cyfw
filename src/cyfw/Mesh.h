@@ -4,6 +4,7 @@
 #include "types.h"
 #include "Shader.h"
 #include <unordered_map>
+#include <string>
 
 namespace cy
 {
@@ -32,13 +33,15 @@ namespace cy
                           unsigned int glType, bool integral, const int *data);
         ptr<Shader> shader;
     public:
-        Mesh(mat_f V, mat_u I);
+        Mesh() : Mesh({}, {}, {}) {}
+        Mesh(mat_f V, mat_u I, mat_f N);
         void draw();
         void upload();
         void uploadAttrib(const std::string &name, const mat_f &m);
         void uploadAttrib(const std::string &name, const mat_u &m);
         void setShader(ptr<Shader>);
         void setPerFaceNormals();
+        void loadFromFile(std::string filename);
     };
 
 }

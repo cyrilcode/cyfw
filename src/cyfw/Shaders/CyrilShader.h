@@ -14,7 +14,8 @@ namespace cy
 
         class CyrilShader {
         public:
-            CyrilShader() : currentColor{1,1,1,1}, cubeMesh{{},{}} {}
+            CyrilShader() : currentColor{1,1,1,1}
+            {}
             void init();
             void bind(ptr<Window> window);
 
@@ -24,6 +25,7 @@ namespace cy
             void pushMatrix();
             void popMatrix();
 
+            void drawCube();
             void drawCube(const vec3f &whd);
             void drawBall(const float r);
             void setBallDetail(const float d);
@@ -54,12 +56,15 @@ namespace cy
             void setProjectionMatrix(const mat4f &m);
             void setViewMatrix(const aff3f &m);
 
+            void debug();
         private:
             ptr<Shader> shader;
-            std::stack<aff3f> matrixStack;
+            std::stack<mat4f> matrixStack;
             aff3f modelMatrix;
             color currentColor;
             Mesh cubeMesh;
+            Mesh coneMesh;
+            Mesh ballMesh;
         };
     }
 }

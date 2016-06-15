@@ -9,17 +9,47 @@
 #include <igl/per_face_normals.h>
 #include <igl/per_corner_normals.h>
 
+#include <igl/slice.h>
+#include <igl/unzip_corners.h>
+#include <igl/readOBJ.h>
 
 using namespace std;
 
 namespace cy
 {
-    Mesh::Mesh(mat_f V, mat_u I)
-    : vertices(V), indices(I), dirty(true), faceBased(false)
+    Mesh::Mesh(mat_f V, mat_u I, mat_f N)
+    : vertices(V), indices(I), normals(N), dirty(true), faceBased(false)
     {
         glGenVertexArrays(1, &vaoId);
     }
 
+    void Mesh::loadFromFile(std::string filename) {
+        Eigen::MatrixXf V, TC, N;
+        Eigen::MatrixXi F,FTC,FN;
+        igl::readOBJ(filename,V,TC,N,F,FTC,FN);
+        if(FTC.size() == 0)
+        {
+            FTC = F;
+        }
+        Eigen::MatrixXi U,G,J;
+        igl::unzip_corners<Eigen::MatrixXi>({F,FTC,FN},U,G,J);
+        // New mesh vertices and texture coordinates indexed by G
+        mat_f GV = igl::slice(Eigen::MatrixXf(V),U.col(0),1);
+        mat_f GTC = igl::slice(Eigen::MatrixXf(TC),U.col(1),1);
+        mat_f GN = igl::slice(Eigen::MatrixXf(N),U.col(2),1);
+
+//        cout << "Unzipped corners from OBJ:" << endl;
+//        cout << GV.transpose() << endl;
+//        cout << GN.transpose() << endl;
+//        cout << GTC.transpose() << endl;
+//        cout << G.transpose() << endl;
+
+        indices = G.transpose();
+        normals = GN.transpose();
+        vertices = GV.transpose();
+    }
+
+    // TODO: fix this using the unzip method of deduping vertices
     void Mesh::setPerFaceNormals() {
         normals = {};
         mat_f tempV = vertices.transpose();
@@ -27,6 +57,10 @@ namespace cy
         mat_f tempN;
         igl::per_face_normals(tempV, tempU, tempN);
         normals = tempN.transpose();
+        cout << "Before: " << endl;
+        cout << indices << endl;
+        cout << vertices << endl;
+        cout << normals << endl;
         if (normals.cols() == vertices.cols())
         {
             faceBased = false;
@@ -53,6 +87,10 @@ namespace cy
             indices = tempU;
             vertices = tempV;
             normals = tempN;
+            cout << "Processed: " << endl;
+            cout << indices << endl;
+            cout << vertices << endl;
+            cout << normals << endl;
         }
         dirty = true;
     }
