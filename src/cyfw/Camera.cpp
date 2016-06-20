@@ -238,7 +238,9 @@ namespace cy
     void Camera::handleCursorMoveEvent(window::CursorMoveEvent e) {
         if (dragging)
         {
-            vec2f offset = (dragPosition - e.location).array() * dragSensitivity.array();
+//            vec2f offset = (dragPosition - e.location).array() * dragSensitivity.array();
+            vec2f offset = dragPosition - e.location;
+            offset = offset.array() * dragSensitivity.array();
             dragPosition = e.location;
 
             rotateAroundTarget(quat4f(
@@ -252,17 +254,15 @@ namespace cy
         if (!dragging)
         {
             zoom(static_cast<float>(e.yOffset * scrollSensitivity.y()));
-            localTranslate({e.xOffset * scrollSensitivity.x(),0,0});
         }
     }
 
     void Camera::rotateAroundTarget(const quat4f &q) {
-        mat4f mrot, mt, mtm;
-
         // force update of transform matrix
         aff3f vm = viewMatrix();
 
         vec3f t = viewM * target;
+
         viewM = Eigen::Translation3f(t) * q * Eigen::Translation3f(-t) * viewM;
 
         quat4f qa(viewM.linear());
