@@ -208,7 +208,7 @@ namespace cy
     void Shader::uploadAttrib(const std::string &name, const mat_u &m)
     {
         uploadAttrib(name, static_cast<uint32_t >(m.size()), static_cast<unsigned int>(m.rows()),
-                     sizeof(uint32_t), GL_UNSIGNED_INT, 1, (const int *) m.data());
+                     sizeof(uint32_t), GL_UNSIGNED_INT, 1, m.data());
     }
 
 }
