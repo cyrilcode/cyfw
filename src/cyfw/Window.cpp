@@ -153,8 +153,8 @@ namespace cy
         glfwGetWindowSize(static_cast<GLFWwindow*>(windowPtr), &width, &height);
         return {width, height};
     }
-    void Window::quit() {
-        glfwSetWindowShouldClose(static_cast<GLFWwindow*>(windowPtr), 1);
+    void Window::quit(bool s) {
+        glfwSetWindowShouldClose(static_cast<GLFWwindow*>(windowPtr), s);
     }
 
     int Window::shouldClose() {

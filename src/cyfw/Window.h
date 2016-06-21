@@ -233,7 +233,7 @@ namespace cy
         vec2i getWindowSize();
         void setClearColor(color c);
         void clear();
-        void quit();
+        void quit(bool s = true);
         void closeOnEscapeKey(bool s);
         void allowToggleFullscreen(bool s);
 
@@ -243,7 +243,7 @@ namespace cy
             APP a;
             a.setWindowPointer(shared_from_this());
             a.setup();
-            while (!shouldClose())
+            while (!shouldClose() || !a.quit())
             {
                 if (refresh())
                 {

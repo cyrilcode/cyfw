@@ -52,6 +52,7 @@ namespace cy
     public:
         void draw() {}
         void setup() {}
+        bool quit() { return true; }
         void setWindowPointer(ptr<Window> w)  { window = w; }
         void key(window::KeyEvent) {}
         void scroll(window::ScrollEvent) {}
